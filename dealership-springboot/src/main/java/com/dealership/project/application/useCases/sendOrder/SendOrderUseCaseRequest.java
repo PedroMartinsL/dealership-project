@@ -1,9 +1,10 @@
 package com.dealership.project.application.useCases.sendOrder;
 
+import com.dealership.project.domain.entities.offers.Car;
+import com.dealership.project.domain.entities.offers.Customization;
+
 public record SendOrderUseCaseRequest(
-  String name,
-  Double price,
-  String description,
-  String category
+  Car car,
+  Customization customization
 ) {
 }

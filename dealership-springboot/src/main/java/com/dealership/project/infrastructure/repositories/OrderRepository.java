@@ -2,8 +2,8 @@ package com.dealership.project.infrastructure.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.dealership.project.domain.entities.users.User;
+import com.dealership.project.domain.entities.offers.Order;
 
-public interface UserRepository extends JpaRepository<User, String> {
+public interface OrderRepository extends JpaRepository<Order, Integer>{
     
 }
