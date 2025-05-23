@@ -1,4 +1,4 @@
-package com.dealership.dealership_project;
+package com.dealership.project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
