@@ -6,10 +6,12 @@ import com.dealership.project.domain.entities.enums.CustomCoating;
 import com.dealership.project.domain.entities.enums.CustomColor;
 import com.dealership.project.domain.entities.enums.CustomWheel;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+@Entity
 public class Customization implements Serializable {
 
     @Id
