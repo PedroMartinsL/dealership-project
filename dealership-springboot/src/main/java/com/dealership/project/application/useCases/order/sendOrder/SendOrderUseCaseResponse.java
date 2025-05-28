@@ -1,9 +1,9 @@
-package com.dealership.project.application.useCases.sendOrder;
+package com.dealership.project.application.useCases.order.sendOrder;
 
 import com.dealership.project.domain.entities.offers.Car;
 import com.dealership.project.domain.entities.offers.Customization;
 
-public record SendOrderUseCaseRequest(
+public record SendOrderUseCaseResponse (
   Car car,
   Customization customization
 ) {

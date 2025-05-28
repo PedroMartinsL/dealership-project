@@ -6,11 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.dealership.project.application.useCases.getCar.GetCarUseCase;
-import com.dealership.project.application.useCases.getCar.GetCarUseCaseRequest;
-import com.dealership.project.application.useCases.getCar.GetCarUseCaseResponse;
-import com.dealership.project.application.useCases.listCars.ListCarsUseCase;
-import com.dealership.project.application.useCases.listCars.ListCarsUseCaseResponse;
+import com.dealership.project.application.useCases.car.getCar.GetCarUseCase;
+import com.dealership.project.application.useCases.car.getCar.GetCarUseCaseRequest;
+import com.dealership.project.application.useCases.car.getCar.GetCarUseCaseResponse;
+import com.dealership.project.application.useCases.car.listCars.ListCarsUseCase;
+import com.dealership.project.application.useCases.car.listCars.ListCarsUseCaseResponse;
 
 @Controller
 public class CarController {
@@ -29,7 +29,8 @@ public class CarController {
 
     @GetMapping(value = "/{id}")
 	public ResponseEntity<GetCarUseCaseResponse> findById(@PathVariable Long id) {
-		GetCarUseCaseResponse response = getCarUseCase.execute(new GetCarUseCaseRequest(id));
+		GetCarUseCaseRequest getCarUseCaseRequest = new GetCarUseCaseRequest(id);
+		GetCarUseCaseResponse response = getCarUseCase.execute(getCarUseCaseRequest);
 		return ResponseEntity.ok().body(response);
 	}
 }

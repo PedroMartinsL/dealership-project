@@ -1,4 +1,4 @@
-package com.dealership.project.application.useCases.getCar;
+package com.dealership.project.application.useCases.car.getCar;
 
 import java.util.Optional;
 

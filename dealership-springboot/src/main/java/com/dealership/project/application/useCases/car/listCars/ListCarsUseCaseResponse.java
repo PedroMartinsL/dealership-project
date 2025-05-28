@@ -1,4 +1,4 @@
-package com.dealership.project.application.useCases.listCars;
+package com.dealership.project.application.useCases.car.listCars;
 
 import java.util.List;
 

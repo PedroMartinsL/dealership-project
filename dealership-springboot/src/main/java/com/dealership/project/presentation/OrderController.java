@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dealership.project.application.useCases.sendOrder.SendOrderUseCase;
-import com.dealership.project.application.useCases.sendOrder.SendOrderUseCaseRequest;
-import com.dealership.project.application.useCases.sendOrder.SendOrderUseCaseResponse;
+import com.dealership.project.application.useCases.order.sendOrder.SendOrderUseCase;
+import com.dealership.project.application.useCases.order.sendOrder.SendOrderUseCaseRequest;
+import com.dealership.project.application.useCases.order.sendOrder.SendOrderUseCaseResponse;
 
 @RestController
 @RequestMapping("/orders")
