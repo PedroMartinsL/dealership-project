@@ -17,9 +17,9 @@ public class SendOrderUseCase {
   @Transactional
   public SendOrderUseCaseResponse execute(SendOrderUseCaseRequest data) {
     
-    Order order = new Order(data.car(), data.customization());
+    // Order order = new Order(data.car(), data.customization());
 
-    repository.save(order);
+    // repository.save(order);
 
     return new SendOrderUseCaseResponse(data.car(),
             data.customization());    

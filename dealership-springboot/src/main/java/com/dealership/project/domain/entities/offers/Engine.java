@@ -2,14 +2,75 @@ package com.dealership.project.domain.entities.offers;
 
 import java.io.Serializable;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.dealership.project.domain.entities.enums.EngineType;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 public class Engine implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ManyToOne
-    @JoinColumn(name = "car_id")  // ou o nome da chave estrangeira
-    private Car car;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private EngineType engineTipe; 
+    private Double horsepower;
+
+    public Engine() {
+
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public EngineType getEngineTipe() {
+        return engineTipe;
+    }
+
+    public void setEngineTipe(EngineType engineTipe) {
+        this.engineTipe = engineTipe;
+    }
+
+    public Double getHorsepower() {
+        return horsepower;
+    }
+
+    public void setHorsepower(Double horsepower) {
+        this.horsepower = horsepower;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Engine other = (Engine) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
+    
 }
