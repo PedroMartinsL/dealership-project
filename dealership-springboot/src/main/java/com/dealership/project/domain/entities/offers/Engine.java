@@ -2,14 +2,88 @@ package com.dealership.project.domain.entities.offers;
 
 import java.io.Serializable;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.dealership.project.domain.entities.enums.EngineType;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Engine implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ManyToOne
-    @JoinColumn(name = "car_id")  // ou o nome da chave estrangeira
-    private Car car;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Integer engineType; 
+    private Double horsepower;
+
+    public Engine() {
+
+    }
+
+    public Engine(Long id, Integer engineType, Double horsepower) {
+        this.id = id;
+        this.engineType = engineType;
+        this.horsepower = horsepower;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public EngineType getEngineType() {
+	    if (engineType == null) {
+	        return null;
+	    }
+	    return EngineType.valueOf(engineType);
+	}
+
+
+	public void setConsultaStatus(EngineType engineType) {
+		if (engineType != null)
+			this.engineType = engineType.getCode();
+	}
+
+    public Double getHorsepower() {
+        return horsepower;
+    }
+
+    public void setHorsepower(Double horsepower) {
+        this.horsepower = horsepower;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Engine other = (Engine) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
+    
 }
