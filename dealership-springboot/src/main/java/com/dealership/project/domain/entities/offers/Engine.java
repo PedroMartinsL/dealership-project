@@ -16,11 +16,17 @@ public class Engine implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private EngineType engineTipe; 
+    private Integer engineType; 
     private Double horsepower;
 
     public Engine() {
 
+    }
+
+    public Engine(Long id, Integer engineType, Double horsepower) {
+        this.id = id;
+        this.engineType = engineType;
+        this.horsepower = horsepower;
     }
 
     public static long getSerialversionuid() {
@@ -31,13 +37,18 @@ public class Engine implements Serializable {
         return id;
     }
 
-    public EngineType getEngineTipe() {
-        return engineTipe;
-    }
+    public EngineType getEngineType() {
+	    if (engineType == null) {
+	        return null;
+	    }
+	    return EngineType.valueOf(engineType);
+	}
 
-    public void setEngineTipe(EngineType engineTipe) {
-        this.engineTipe = engineTipe;
-    }
+
+	public void setConsultaStatus(EngineType engineType) {
+		if (engineType != null)
+			this.engineType = engineType.getCode();
+	}
 
     public Double getHorsepower() {
         return horsepower;

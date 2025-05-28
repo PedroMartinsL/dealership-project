@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -20,7 +21,9 @@ public class Car implements Serializable {
     private Long id;
 
     private String model;
-    @ManyToOne()
+
+    @ManyToOne
+    @JoinColumn(name = "engine_id")
     private Engine engine;
     private Double weight;
     private Integer autonomyKm;

@@ -16,15 +16,15 @@ public class Customization implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private CustomColor customColor;
-    private CustomWheel customWheel;
-    private CustomCoating customCoating;
+    private Integer customColor;
+    private Integer customWheel;
+    private Integer customCoating;
 
     public Customization() {
 
     }
 
-    public Customization(Long id, CustomColor customColor, CustomWheel customWheel, CustomCoating customCoating) {
+    public Customization(Long id, Integer customColor, Integer customWheel, Integer customCoating) {
         this.id = id;
         this.customColor = customColor;
         this.customWheel = customWheel;
@@ -40,27 +40,42 @@ public class Customization implements Serializable {
     }
 
     public CustomColor getCustomColor() {
-        return customColor;
+        if (customColor == null) {
+            return null;
+        }
+        return CustomColor.valueOf(customColor);
     }
 
     public void setCustomColor(CustomColor customColor) {
-        this.customColor = customColor;
+        if (customColor != null) {
+            this.customColor = customColor.getCode();
+        }
     }
 
     public CustomWheel getCustomWheel() {
-        return customWheel;
+        if (customWheel == null) {
+            return null;
+        }
+        return CustomWheel.valueOf(customWheel);
     }
 
     public void setCustomWheel(CustomWheel customWheel) {
-        this.customWheel = customWheel;
+        if (customWheel != null) {
+            this.customWheel = customWheel.getCode();
+        }
     }
 
     public CustomCoating getCustomCoating() {
-        return customCoating;
+        if (customCoating == null) {
+            return null;
+        }
+        return CustomCoating.valueOf(customCoating);
     }
 
     public void setCustomCoating(CustomCoating customCoating) {
-        this.customCoating = customCoating;
+        if (customCoating != null) {
+            this.customCoating = customCoating.getCode();
+        }
     }
 
     @Override
