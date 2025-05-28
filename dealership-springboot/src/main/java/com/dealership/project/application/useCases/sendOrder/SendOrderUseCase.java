@@ -3,7 +3,6 @@ package com.dealership.project.application.useCases.sendOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dealership.project.domain.entities.offers.Order;
 import com.dealership.project.infrastructure.repositories.OrderRepository;
 
 import jakarta.transaction.Transactional;
