@@ -2,6 +2,8 @@ package com.dealership.project.domain.entities;
 
 import java.io.Serializable;
 
+import com.dealership.project.api.dto.OrderDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -38,6 +40,13 @@ public class Order implements Serializable {
 
     public Order() {
 
+    }
+
+    public Order(OrderDTO orderDTO) {
+        this.car = orderDTO.getCar();
+        this.customization = orderDTO.getCustomization();
+        this.user = orderDTO.getUser();
+        this.store = orderDTO.getStore();
     }
 
     public Order(Long id, Car car, Customization customization, User user, Store store) {
