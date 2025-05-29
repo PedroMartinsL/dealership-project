@@ -1,18 +1,16 @@
-package com.dealership.project.domain.entities.offers;
+package com.dealership.project.domain.entities;
 
 import java.io.Serializable;
 
-import com.dealership.project.domain.entities.users.User;
+import com.dealership.project.domain.entities.enums.EngineType;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Order implements Serializable {
+public class Engine implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,32 +18,17 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "car_id")
-    private Car car;
+    private Integer engineType; 
+    private Double horsepower;
 
-    @ManyToOne
-    @JoinColumn(name = "customization_id")
-    private Customization customization;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "store_id")
-    private Store store;
-
-    public Order() {
+    public Engine() {
 
     }
 
-    public Order(Long id, Car car, Customization customization, User user, Store store) {
+    public Engine(Long id, Integer engineType, Double horsepower) {
         this.id = id;
-        this.car = car;
-        this.customization = customization;
-        this.user = user;
-        this.store = store;
+        this.engineType = engineType;
+        this.horsepower = horsepower;
     }
 
     public static long getSerialversionuid() {
@@ -56,24 +39,25 @@ public class Order implements Serializable {
         return id;
     }
 
-    public Car getCar() {
-        return car;
+    public EngineType getEngineType() {
+	    if (engineType == null) {
+	        return null;
+	    }
+	    return EngineType.valueOf(engineType);
+	}
+
+
+	public void setConsultaStatus(EngineType engineType) {
+		if (engineType != null)
+			this.engineType = engineType.getCode();
+	}
+
+    public Double getHorsepower() {
+        return horsepower;
     }
 
-    public Customization getCustomization() {
-        return customization;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Store getStore() {
-        return store;
-    }
-
-    public void setStore(Store store) {
-        this.store = store;
+    public void setHorsepower(Double horsepower) {
+        this.horsepower = horsepower;
     }
 
     @Override
@@ -92,7 +76,7 @@ public class Order implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Order other = (Order) obj;
+        Engine other = (Engine) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -100,4 +84,6 @@ public class Order implements Serializable {
             return false;
         return true;
     }
+
+    
 }

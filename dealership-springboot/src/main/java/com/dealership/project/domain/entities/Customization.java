@@ -1,4 +1,4 @@
-package com.dealership.project.domain.entities.offers;
+package com.dealership.project.domain.entities;
 
 import java.io.Serializable;
 

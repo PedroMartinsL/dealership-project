@@ -1,4 +1,4 @@
-package com.dealership.project.domain.entities.users;
+package com.dealership.project.domain.entities;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

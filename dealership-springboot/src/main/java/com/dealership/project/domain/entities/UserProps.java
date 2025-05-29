@@ -1,4 +1,4 @@
-package com.dealership.project.domain.entities.users;
+package com.dealership.project.domain.entities;
 
 public record UserProps (
     String name,

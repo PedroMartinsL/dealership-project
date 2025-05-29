@@ -1,4 +1,4 @@
-package com.dealership.project.domain.entities.offers;
+package com.dealership.project.domain.entities;
 
 import java.io.Serializable;
 
@@ -8,10 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "cars")
 public class Car implements Serializable {
 
     private static final long serialVersionUID = 1L;

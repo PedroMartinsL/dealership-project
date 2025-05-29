@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dealership.project.application.useCases.car.getCar.GetCarUseCase;
 import com.dealership.project.application.useCases.car.getCar.GetCarUseCaseRequest;
@@ -13,6 +14,7 @@ import com.dealership.project.application.useCases.car.listCars.ListCarsUseCase;
 import com.dealership.project.application.useCases.car.listCars.ListCarsUseCaseResponse;
 
 @Controller
+@RequestMapping(value = "/cars")
 public class CarController {
 
     @Autowired
