@@ -1,4 +1,6 @@
-package com.dealership.project.application.useCases.order.sendOrder;
+package com.dealership.project.application.useCases.order.findAll;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,16 +11,14 @@ import com.dealership.project.infrastructure.repositories.JpaOrderRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-public class SendOrderUseCase {
+public class FindAllOrdersUseCase {
 
   @Autowired
   private JpaOrderRepository orderRepository;
 
   @Transactional
-  public SendOrderUseCaseResponse execute(SendOrderUseCaseRequest request) {
-
-    Order order = new Order(request.orderDTO());
-    order = orderRepository.save(order);
-    return new SendOrderUseCaseResponse(order);
+  public FindAllOrdersUseCaseResponse execute() {
+    List<Order> orders = orderRepository.findAll();
+    return new FindAllOrdersUseCaseResponse(orders);
   }
 }
