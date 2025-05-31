@@ -1,4 +1,4 @@
-package com.dealership.project.application.useCases.order.sendOrder;
+package com.dealership.project.application.useCases.order.send;
 
 import com.dealership.project.api.dto.OrderDTO;
 

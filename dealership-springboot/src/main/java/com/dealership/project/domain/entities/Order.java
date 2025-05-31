@@ -1,8 +1,10 @@
 package com.dealership.project.domain.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import com.dealership.project.api.dto.OrderDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,6 +40,9 @@ public class Order implements Serializable {
     @JoinColumn(name = "store_id")
     private Store store;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+	private Instant orderInstant;
+
     public Order() {
 
     }
@@ -47,14 +52,16 @@ public class Order implements Serializable {
         this.customization = orderDTO.getCustomization();
         this.user = orderDTO.getUser();
         this.store = orderDTO.getStore();
+        this.orderInstant = orderDTO.getOrderInstant();
     }
 
-    public Order(Long id, Car car, Customization customization, User user, Store store) {
+    public Order(Long id, Car car, Customization customization, User user, Store store, Instant orderInstant) {
         this.id = id;
         this.car = car;
         this.customization = customization;
         this.user = user;
         this.store = store;
+        this.orderInstant = orderInstant;
     }
 
     public static long getSerialversionuid() {
@@ -83,6 +90,10 @@ public class Order implements Serializable {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public Instant getOrderInstant() {
+        return orderInstant;
     }
 
     @Override

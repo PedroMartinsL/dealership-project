@@ -1,18 +1,14 @@
 package com.dealership.project.application.useCases.order.findById;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dealership.project.application.useCases.order.AbstractOrderUseCase;
 import com.dealership.project.domain.entities.Order;
-import com.dealership.project.infrastructure.repositories.JpaOrderRepository;
 
 import jakarta.transaction.Transactional;
 
 @Service
-public class FindByIdOrderUseCase {
-
-  @Autowired
-  private JpaOrderRepository orderRepository;
+public class FindByIdOrderUseCase extends AbstractOrderUseCase {
 
   @Transactional
   public FindByIdOrderUseCaseResponse execute(FindByIdOrderUseCaseRequest request) {

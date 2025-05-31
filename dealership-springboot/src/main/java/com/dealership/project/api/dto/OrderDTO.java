@@ -1,5 +1,7 @@
 package com.dealership.project.api.dto;
 
+import java.time.Instant;
+
 import com.dealership.project.domain.entities.Car;
 import com.dealership.project.domain.entities.Customization;
 import com.dealership.project.domain.entities.Store;
@@ -13,4 +15,5 @@ public class OrderDTO {
     private User user;
     private Customization customization;
     private Store store;
+    private Instant orderInstant;
 }
