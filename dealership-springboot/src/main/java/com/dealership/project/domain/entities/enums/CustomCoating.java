@@ -6,7 +6,7 @@ public enum CustomCoating {
     SATIN(3),
     TEXTURED(4);
 
-    private int code;
+    private final int code;
 
     private CustomCoating(int code) {
         this.code = code;

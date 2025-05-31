@@ -1,6 +1,6 @@
-package com.dealership.project.application.useCases.car.getCar;
+package com.dealership.project.application.useCases.car.findAll;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,15 +8,14 @@ import org.springframework.stereotype.Service;
 import com.dealership.project.domain.entities.Car;
 import com.dealership.project.infrastructure.repositories.JpaCarRepository;
 
-
 @Service
-public class GetCarUseCase {
+public class FindAllCarsUseCase {
 
     @Autowired
     private JpaCarRepository carRepository;
 
-    public GetCarUseCaseResponse execute(GetCarUseCaseRequest request) {
-        Optional<Car> findCar = carRepository.findById(request.id());
-        return new GetCarUseCaseResponse(findCar);
+    public FindAllCarsUseCaseResponse execute() {
+        List<Car> listCars = carRepository.findAll();
+        return new FindAllCarsUseCaseResponse(listCars);
     }
 }

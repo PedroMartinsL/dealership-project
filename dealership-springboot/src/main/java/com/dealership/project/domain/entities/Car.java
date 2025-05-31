@@ -2,6 +2,7 @@ package com.dealership.project.domain.entities;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +26,9 @@ public class Car implements Serializable {
     private Engine engine;
     private Double weight;
     private Integer autonomyKm;
+
+    @Column(name = "active")
+    private boolean active = true;
 
     public Car() {
 
@@ -78,6 +82,14 @@ public class Car implements Serializable {
         this.autonomyKm = autonomyKm;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -102,5 +114,4 @@ public class Car implements Serializable {
             return false;
         return true;
     }
-
 }

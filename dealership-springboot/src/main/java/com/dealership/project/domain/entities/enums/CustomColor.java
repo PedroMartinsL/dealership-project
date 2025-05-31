@@ -8,7 +8,7 @@ public enum CustomColor {
     SILVER(5),
     GOLD(6);
 
-    private int code;
+    private final int code;
 
     private CustomColor(int code) {
         this.code = code;

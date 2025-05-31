@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.dealership.project.domain.entities.enums.EngineType;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,8 +19,11 @@ public class Engine implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer engineType; 
+    private Integer engineType;
     private Double horsepower;
+
+    @Column(name = "active")
+    private boolean active = true;
 
     public Engine() {
 
@@ -40,17 +44,17 @@ public class Engine implements Serializable {
     }
 
     public EngineType getEngineType() {
-	    if (engineType == null) {
-	        return null;
-	    }
-	    return EngineType.valueOf(engineType);
-	}
+        if (engineType == null) {
+            return null;
+        }
+        return EngineType.valueOf(engineType);
+    }
 
-
-	public void setConsultaStatus(EngineType engineType) {
-		if (engineType != null)
-			this.engineType = engineType.getCode();
-	}
+    public void setEngineType(EngineType engineType) {
+        if (engineType != null) {
+            this.engineType = engineType.getCode();
+        }
+    }
 
     public Double getHorsepower() {
         return horsepower;
@@ -58,6 +62,14 @@ public class Engine implements Serializable {
 
     public void setHorsepower(Double horsepower) {
         this.horsepower = horsepower;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override
@@ -70,20 +82,24 @@ public class Engine implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Engine other = (Engine) obj;
         if (id == null) {
-            if (other.id != null)
+            if (other.id != null) {
                 return false;
-        } else if (!id.equals(other.id))
+            }
+        } else if (!id.equals(other.id)) {
             return false;
+        }
         return true;
     }
 
-    
 }

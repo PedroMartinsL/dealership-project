@@ -6,7 +6,7 @@ public enum CustomWheel {
     OFFROAD(3),
     PERFORMANCE(4);
 
-    private int code;
+    private final int code;
 
     private CustomWheel(int code) {
         this.code = code;

@@ -6,7 +6,7 @@ public enum EngineType {
     INTERNAL_COMBUSTION(2),
     HIBRID(3);
 
-    private int code;
+    private final int code;
 
     private EngineType(int code) {
         this.code = code;
