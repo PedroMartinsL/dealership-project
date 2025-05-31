@@ -8,12 +8,9 @@ import com.dealership.project.application.useCases.order.AbstractOrderUseCase;
 import com.dealership.project.domain.entities.Order;
 import com.dealership.project.presentation.exceptions.ResourceNotFoundException;
 
-import jakarta.transaction.Transactional;
-
 @Service
 public class FindByStoreOrderUseCase extends AbstractOrderUseCase {
 
-    @Transactional
     public FindByStoreOrderUseCaseResponse execute(FindByStoreOrderUseCaseRequest request) {
         Long storeId = request.storeId();
         List<Order> orderList = orderRepository.findByStoreId(storeId);

@@ -10,10 +10,14 @@ import jakarta.transaction.Transactional;
 @Service
 public class SendOrderUseCase extends AbstractOrderUseCase {
 
-  @Transactional
-  public SendOrderUseCaseResponse execute(SendOrderUseCaseRequest request) {
-    Order order = new Order(request.orderDTO());
-    order = orderRepository.save(order);
-    return new SendOrderUseCaseResponse(order);
-  }
+    @Transactional
+    public SendOrderUseCaseResponse execute(SendOrderUseCaseRequest request) {
+        try {
+            Order order = new Order(request.orderDTO());
+            order = orderRepository.save(order);
+            return new SendOrderUseCaseResponse(order);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Erro ao salvar pedido: " + e.getMessage(), e);
+        }
+    }
 }

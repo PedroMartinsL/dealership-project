@@ -4,16 +4,15 @@ import org.springframework.stereotype.Service;
 
 import com.dealership.project.application.useCases.order.AbstractOrderUseCase;
 import com.dealership.project.domain.entities.Order;
-
-import jakarta.transaction.Transactional;
+import com.dealership.project.presentation.exceptions.ResourceNotFoundException;
 
 @Service
 public class FindByIdOrderUseCase extends AbstractOrderUseCase {
 
-  @Transactional
   public FindByIdOrderUseCaseResponse execute(FindByIdOrderUseCaseRequest request) {
-    Order order = orderRepository.findById(request.orderId())
-                                 .orElseThrow(() -> new IllegalArgumentException("Order not found"));
+    Long id = request.orderId();
+    Order order = orderRepository.findById(id)
+                                 .orElseThrow(() -> new ResourceNotFoundException(id));
     return new FindByIdOrderUseCaseResponse(order);
   }
 }
