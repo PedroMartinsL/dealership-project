@@ -19,7 +19,7 @@ public class Engine implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(name="engine_type")
     private Integer engineType;
     private Double horsepower;
 

@@ -7,6 +7,7 @@ import com.dealership.project.api.dto.OrderDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,6 +42,7 @@ public class Order implements Serializable {
     @JoinColumn(name = "store_id")
     private Store store;
 
+    @Column(name = "order_instant")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant orderInstant;
 

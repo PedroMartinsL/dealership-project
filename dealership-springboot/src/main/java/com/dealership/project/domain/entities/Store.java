@@ -2,6 +2,7 @@ package com.dealership.project.domain.entities;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class Store implements Serializable {
     private String logo;
     private String street;
     private String city;
+    @Column(name = "address_number")
     private String addressNumber;
     private String state;
 

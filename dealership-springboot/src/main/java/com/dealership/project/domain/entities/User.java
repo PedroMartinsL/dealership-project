@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,9 +13,6 @@ public class User extends EntityReference<UserProps> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String password;
-
-    @Id
-    private String id;
 
     public User() {
         // Chama o construtor da superclasse (EntityReference) com parâmetros padrão

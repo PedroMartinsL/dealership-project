@@ -3,10 +3,15 @@ package com.dealership.project.domain.entities;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+
 public abstract class EntityReference<T> {
+    @Id
     private final String id;
     protected UserProps props;
     private final LocalDateTime createdAt;
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     public EntityReference(UserProps props, String id, LocalDateTime createdAt, LocalDateTime updatedAt) {
