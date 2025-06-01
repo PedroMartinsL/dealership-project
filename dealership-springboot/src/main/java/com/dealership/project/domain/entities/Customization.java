@@ -2,6 +2,7 @@ package com.dealership.project.domain.entities;
 
 import java.io.Serializable;
 
+import com.dealership.project.api.dto.CustomizationDTO;
 import com.dealership.project.domain.entities.enums.CustomCoating;
 import com.dealership.project.domain.entities.enums.CustomColor;
 import com.dealership.project.domain.entities.enums.CustomWheel;
@@ -10,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Customization implements Serializable {
@@ -22,6 +25,11 @@ public class Customization implements Serializable {
     private Integer customWheel;
     private Integer customCoating;
 
+    
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
+
     public Customization() {
 
     }
@@ -31,6 +39,12 @@ public class Customization implements Serializable {
         this.customColor = customColor;
         this.customWheel = customWheel;
         this.customCoating = customCoating;
+    }
+
+    public Customization(CustomizationDTO customizationDTO) {
+        this.customCoating = customizationDTO.getCustomCoating();
+        this.customColor = customizationDTO.getCustomColor();
+        this.customWheel = customizationDTO.getCustomWheel();
     }
 
     public Long getId() {
@@ -80,6 +94,10 @@ public class Customization implements Serializable {
         }
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -104,5 +122,4 @@ public class Customization implements Serializable {
             return false;
         return true;
     }
-
 }

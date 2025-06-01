@@ -6,12 +6,14 @@ import java.time.Instant;
 import com.dealership.project.api.dto.OrderDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -28,8 +30,7 @@ public class Order implements Serializable {
     @JoinColumn(name = "car_id")
     private Car car;
 
-    @ManyToOne
-    @JoinColumn(name = "customization_id")
+    @OneToOne(mappedBy = "order", cascade = CascadeType.REMOVE)
     private Customization customization;
 
     @ManyToOne
