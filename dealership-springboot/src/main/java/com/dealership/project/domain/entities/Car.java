@@ -2,6 +2,8 @@ package com.dealership.project.domain.entities;
 
 import java.io.Serializable;
 
+import com.dealership.project.api.dto.CarDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,11 +21,10 @@ public class Car implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String model;
-
     @ManyToOne
     @JoinColumn(name = "engine_id")
     private Engine engine;
+    private String model;
     private Double weight;
     private Integer autonomyKm;
 
@@ -40,6 +41,14 @@ public class Car implements Serializable {
         this.engine = engine;
         this.weight = weight;
         this.autonomyKm = autonomyKm;
+    }
+
+    public Car(CarDTO carDTO) {
+        this.engine = carDTO.getEngine();
+        this.autonomyKm = carDTO.getAutonomyKm();
+        this.active = carDTO.isActive();
+        this.model = carDTO.getModel();
+        this.weight = carDTO.getWeight();
     }
 
     public Long getId() {

@@ -31,10 +31,11 @@ public class Order implements Serializable {
     @JoinColumn(name = "car_id")
     private Car car;
 
-    @OneToOne(mappedBy = "order", cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "customization_id")
     private Customization customization;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id")
     private User user;
 

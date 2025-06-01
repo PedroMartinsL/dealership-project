@@ -15,20 +15,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.dealership.project.api.dto.CarDTO;
+import com.dealership.project.application.useCases.car.delete.DeleteCarUseCase;
+import com.dealership.project.application.useCases.car.delete.DeleteCarUseCaseRequest;
 import com.dealership.project.application.useCases.car.findAll.FindAllCarsUseCase;
 import com.dealership.project.application.useCases.car.findAll.FindAllCarsUseCaseResponse;
 import com.dealership.project.application.useCases.car.findById.FindByIdCarUseCase;
 import com.dealership.project.application.useCases.car.findById.FindByIdCarUseCaseRequest;
 import com.dealership.project.application.useCases.car.findById.FindByIdCarUseCaseResponse;
-import com.dealership.project.application.useCases.engine.delete.DeleteEngineUseCaseRequest;
+import com.dealership.project.application.useCases.car.send.SendCarUseCase;
+import com.dealership.project.application.useCases.car.send.SendCarUseCaseRequest;
+import com.dealership.project.application.useCases.car.send.SendCarUseCaseResponse;
+import com.dealership.project.application.useCases.car.update.UpdateCarUseCase;
+import com.dealership.project.application.useCases.car.update.UpdateCarUseCaseRequest;
+import com.dealership.project.application.useCases.car.update.UpdateCarUseCaseResponse;
 import com.dealership.project.domain.entities.Car;
 
 @Controller
 @RequestMapping(value = "/cars")
 public class CarController {
-	
-	@Autowired
-    private SendCarUseCase sendCarUseCase;
 
     @Autowired
     private FindByIdCarUseCase findByIdCarUseCase;
@@ -42,10 +47,13 @@ public class CarController {
     @Autowired
     private DeleteCarUseCase deleteCarUseCase;
 
+    @Autowired
+    private SendCarUseCase sendCarUseCase;
+
     @GetMapping
     public ResponseEntity<List<Car>> findAll() {
 		FindAllCarsUseCaseResponse response = findAllCarsUseCase.execute();
-        List<Car> CarsList = response.cars();
+        List<Car> CarsList = response.listCars();
 		return ResponseEntity.ok().body(CarsList);
 	}
 
@@ -63,7 +71,7 @@ public class CarController {
     ) {
         SendCarUseCaseRequest carRequest = new SendCarUseCaseRequest(carDTO);
         SendCarUseCaseResponse carResponse = sendCarUseCase.execute(carRequest);
-        Car car = carResponse.Car();
+        Car car = carResponse.car();
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(car.getId()).toUri();
 		return ResponseEntity.created(uri).body(car);
     }

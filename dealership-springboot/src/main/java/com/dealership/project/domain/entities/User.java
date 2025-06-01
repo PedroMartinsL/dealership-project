@@ -2,8 +2,13 @@ package com.dealership.project.domain.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,6 +18,10 @@ public class User extends EntityReference<UserProps> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String password;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders; 
 
     public User() {
         // Chama o construtor da superclasse (EntityReference) com parâmetros padrão
@@ -45,4 +54,10 @@ public class User extends EntityReference<UserProps> implements Serializable {
         this.password = newPassword;
         touch(); // atualiza o updatedAt
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    
 }
