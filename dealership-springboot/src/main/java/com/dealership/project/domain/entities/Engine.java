@@ -2,6 +2,7 @@ package com.dealership.project.domain.entities;
 
 import java.io.Serializable;
 
+import com.dealership.project.api.dto.EngineDTO;
 import com.dealership.project.domain.entities.enums.EngineType;
 
 import jakarta.persistence.Column;
@@ -33,6 +34,12 @@ public class Engine implements Serializable {
         this.id = id;
         this.engineType = engineType;
         this.horsepower = horsepower;
+    }
+
+    public Engine(EngineDTO engineDTO) {
+        this.horsepower = engineDTO.getHorsepower();
+        this.engineType = engineDTO.getEngineType().getCode();
+        this.active = engineDTO.isActive();
     }
 
     public static long getSerialversionuid() {

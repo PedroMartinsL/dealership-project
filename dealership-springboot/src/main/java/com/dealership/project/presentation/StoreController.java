@@ -30,7 +30,7 @@ import com.dealership.project.application.useCases.Store.update.UpdateStoreUseCa
 import com.dealership.project.domain.entities.Store;
 
 @Controller
-@RequestMapping(value = "/Stores")
+@RequestMapping(value = "/stores")
 public class StoreController {
 
     @Autowired

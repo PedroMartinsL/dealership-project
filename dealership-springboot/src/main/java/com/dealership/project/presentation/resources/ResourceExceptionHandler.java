@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.dealership.project.presentation.exceptions.AssociationInUseException;
 import com.dealership.project.presentation.exceptions.DatabaseException;
 import com.dealership.project.presentation.exceptions.ResourceNotFoundException;
 
@@ -43,5 +44,13 @@ public class ResourceExceptionHandler {
 	        request.getRequestURI()
 	    );
 	    return ResponseEntity.status(status).body(err);
+	}
+
+	@ExceptionHandler(AssociationInUseException.class)
+	public ResponseEntity<StandardError> classInAssociation(AssociationInUseException e, HttpServletRequest request) {
+		String error = "The resource cannot be removed or changed because it is in use by another entity.";
+		HttpStatus status = HttpStatus.CONFLICT;
+		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
 	}
 }

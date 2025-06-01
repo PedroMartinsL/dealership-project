@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.dealership.project.domain.entities.Car;
 
 public interface JpaCarRepository extends JpaRepository<Car, Long> {
+    boolean existsByEngineId(Long id);
 }
