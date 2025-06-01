@@ -67,13 +67,13 @@ public class EngineController {
 
     @PostMapping
     public ResponseEntity<Engine> insert(
-        @RequestBody EngineDTO EngineDTO
+        @RequestBody EngineDTO engineDTO
     ) {
-        SendEngineUseCaseRequest EngineRequest = new SendEngineUseCaseRequest(EngineDTO);
+        SendEngineUseCaseRequest EngineRequest = new SendEngineUseCaseRequest(engineDTO);
         SendEngineUseCaseResponse EngineResponse = sendEngineUseCase.execute(EngineRequest);
-        Engine Engine = EngineResponse.engine();
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(Engine.getId()).toUri();
-		return ResponseEntity.created(uri).body(Engine);
+        Engine engine = EngineResponse.engine();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(engine.getId()).toUri();
+		return ResponseEntity.created(uri).body(engine);
     }
 
     @DeleteMapping(value = "/{id}")

@@ -15,18 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.dealership.project.api.dto.StoreDTO;
-import com.dealership.project.application.useCases.Store.findAll.FindAllStoresUseCase;
-import com.dealership.project.application.useCases.Store.findAll.ListStoresUseCase;
-import com.dealership.project.application.useCases.Store.findAll.ListStoresUseCaseResponse;
-import com.dealership.project.application.useCases.Store.findById.FindByIdStoreUseCase;
-import com.dealership.project.application.useCases.Store.findById.GetStoreUseCase;
-import com.dealership.project.application.useCases.Store.findById.GetStoreUseCaseRequest;
-import com.dealership.project.application.useCases.Store.findById.GetStoreUseCaseResponse;
-import com.dealership.project.application.useCases.Store.delete.DeleteStoreUseCaseRequest;
-import com.dealership.project.application.useCases.Store.send.SendStoreUseCaseRequest;
-import com.dealership.project.application.useCases.Store.send.SendStoreUseCaseResponse;
-import com.dealership.project.application.useCases.Store.update.UpdateStoreUseCaseRequest;
-import com.dealership.project.application.useCases.Store.update.UpdateStoreUseCaseResponse;
+import com.dealership.project.application.useCases.store.delete.DeleteStoreUseCase;
+import com.dealership.project.application.useCases.store.delete.DeleteStoreUseCaseRequest;
+import com.dealership.project.application.useCases.store.findAll.FindAllStoresUseCase;
+import com.dealership.project.application.useCases.store.findAll.FindAllStoresUseCaseResponse;
+import com.dealership.project.application.useCases.store.findById.FindByIdStoreUseCase;
+import com.dealership.project.application.useCases.store.findById.FindByIdStoreUseCaseRequest;
+import com.dealership.project.application.useCases.store.findById.FindByIdStoreUseCaseResponse;
+import com.dealership.project.application.useCases.store.send.SendStoreUseCase;
+import com.dealership.project.application.useCases.store.send.SendStoreUseCaseRequest;
+import com.dealership.project.application.useCases.store.send.SendStoreUseCaseResponse;
+import com.dealership.project.application.useCases.store.update.UpdateStoreUseCase;
+import com.dealership.project.application.useCases.store.update.UpdateStoreUseCaseRequest;
+import com.dealership.project.application.useCases.store.update.UpdateStoreUseCaseResponse;
 import com.dealership.project.domain.entities.Store;
 
 @Controller
@@ -43,28 +44,31 @@ public class StoreController {
     private FindAllStoresUseCase findAllStoresUseCase;
 
     @Autowired
+    private DeleteStoreUseCase deleteStoreUseCase;
+
+    @Autowired
     private UpdateStoreUseCase updateStoreUseCase;
     
     @GetMapping
-	public ResponseEntity<ListStoresUseCaseResponse> findAll() {
-		ListStoresUseCaseResponse response = listStoresUseCase.execute();
+	public ResponseEntity<FindAllStoresUseCaseResponse> findAll() {
+		FindAllStoresUseCaseResponse response = findAllStoresUseCase.execute();
 		return ResponseEntity.ok().body(response);
 	}
 
     @GetMapping(value = "/{id}")
-	public ResponseEntity<GetStoreUseCaseResponse> findById(@PathVariable Long id) {
-		GetStoreUseCaseRequest getStoreUseCaseRequest = new GetStoreUseCaseRequest(id);
-		GetStoreUseCaseResponse response = getStoreUseCase.execute(getStoreUseCaseRequest);
+	public ResponseEntity<FindByIdStoreUseCaseResponse> findById(@PathVariable Long id) {
+		FindByIdStoreUseCaseRequest request = new FindByIdStoreUseCaseRequest(id);
+		FindByIdStoreUseCaseResponse response = findByIdStoreUseCase.execute(request);
 		return ResponseEntity.ok().body(response);
 	}
 
 	@PostMapping
     public ResponseEntity<Store> insert(
-        @RequestBody StoreDTO StoreDTO
+        @RequestBody StoreDTO storeDTO
     ) {
-        SendStoreUseCaseRequest StoreRequest = new SendStoreUseCaseRequest(StoreDTO);
-        SendStoreUseCaseResponse StoreResponse = sendStoreUseCase.execute(StoreRequest);
-        Store Store = StoreResponse.Store();
+        SendStoreUseCaseRequest storeRequest = new SendStoreUseCaseRequest(storeDTO);
+        SendStoreUseCaseResponse StoreResponse = sendStoreUseCase.execute(storeRequest);
+        Store Store = StoreResponse.store();
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(Store.getId()).toUri();
 		return ResponseEntity.created(uri).body(Store);
     }
@@ -80,7 +84,7 @@ public class StoreController {
     public ResponseEntity<Store> update(@PathVariable Long id, @RequestBody StoreDTO StoreDTO) {
         UpdateStoreUseCaseRequest request = new UpdateStoreUseCaseRequest(id, StoreDTO);
 		UpdateStoreUseCaseResponse response = updateStoreUseCase.execute(request);
-        Store Store = response.Store();
+        Store Store = response.store();
 		return ResponseEntity.ok().body(Store);
 	}
 }

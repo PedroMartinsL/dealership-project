@@ -2,6 +2,8 @@ package com.dealership.project.domain.entities;
 
 import java.io.Serializable;
 
+import com.dealership.project.api.dto.StoreDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +37,15 @@ public class Store implements Serializable {
         this.addressNumber = addressNumber;
         this.state = state;
     }
+
+    public Store(StoreDTO storeDTO) {
+        this.logo = storeDTO.getLogo();
+        this.street = storeDTO.getStreet();
+        this.city = storeDTO.getCity();
+        this.addressNumber = storeDTO.getAddressNumber();
+        this.state = storeDTO.getState();
+    }
+    
 
     public String getLogo() {
         return logo;

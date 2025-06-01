@@ -10,4 +10,5 @@ import com.dealership.project.domain.entities.Order;
 public interface JpaOrderRepository extends JpaRepository<Order, Long>{
     List<Order> findByStoreId(Long storeId);
     List<Order> findByUserId(Long userId);
+    boolean existsByStoreId(Long storeId);
 }
