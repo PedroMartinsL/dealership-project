@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.dealership.project.api.dto.CustomizationDTO;
@@ -24,7 +24,7 @@ import com.dealership.project.application.useCases.customization.send.SendCustom
 import com.dealership.project.application.useCases.customization.send.SendCustomizationUseCaseResponse;
 import com.dealership.project.domain.entities.Customization;
 
-@Controller
+@RestController
 @RequestMapping(value = "/customizations")
 public class CustomizationController {
 
