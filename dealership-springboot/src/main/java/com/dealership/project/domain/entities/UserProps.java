@@ -1,7 +1,11 @@
 package com.dealership.project.domain.entities;
 
-public record UserProps (
-    String name,
-    String email
-) {
+import jakarta.persistence.Embeddable;
+import lombok.Data;
+
+@Embeddable
+@Data
+public class UserProps {
+    private String name;
+    private String email;
 }

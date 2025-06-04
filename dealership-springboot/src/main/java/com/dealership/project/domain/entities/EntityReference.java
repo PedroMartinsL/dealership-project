@@ -5,16 +5,21 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
+@MappedSuperclass
 public abstract class EntityReference<T> {
     @Id
-    private final String id;
-    protected UserProps props;
-    private final LocalDateTime createdAt;
+    private String id;
+
+    protected T props;
+
+    private LocalDateTime createdAt;
+
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public EntityReference(UserProps props, String id, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public EntityReference(T props, String id, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = (id != null) ? id : UUID.randomUUID().toString();
         this.props = props;
         this.createdAt = (createdAt != null) ? createdAt : LocalDateTime.now();

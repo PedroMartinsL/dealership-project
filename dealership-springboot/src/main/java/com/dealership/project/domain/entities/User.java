@@ -4,20 +4,36 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.Type;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.hypersistence.utils.hibernate.type.array.ListArrayType;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Table(name = "user_data")
+@EqualsAndHashCode(callSuper = false)
 public class User extends EntityReference<UserProps> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
+    @Column(nullable = false)
     private String password;
+
+    @Embedded
+    private UserProps props;
+
+    @Type(ListArrayType.class)
+    @Column(name = "roles", columnDefinition = "varchar[]")
+    private List<String> roles;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -39,11 +55,21 @@ public class User extends EntityReference<UserProps> implements Serializable {
     }
 
     public String getName() {
-        return props.name();
+        return props.getName();
     }
 
     public String getEmail() {
-        return props.email();
+        return props.getEmail();
+    }
+
+    public void setName(String name) {
+        props.setName(name);
+        touch();
+    }
+
+    public void setEmail(String email) {
+        props.setEmail(email);
+        touch();
     }
 
     public String getPassword() {
@@ -58,6 +84,4 @@ public class User extends EntityReference<UserProps> implements Serializable {
     public List<Order> getOrders() {
         return orders;
     }
-
-    
 }
