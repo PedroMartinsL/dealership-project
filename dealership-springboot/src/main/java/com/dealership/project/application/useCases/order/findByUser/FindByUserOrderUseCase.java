@@ -15,7 +15,7 @@ public class FindByUserOrderUseCase extends AbstractOrderUseCase {
 
     @Transactional
     public FindByUserOrderUseCaseResponse execute(FindByUserOrderUseCaseRequest request) {
-        Long userId = request.userId();
+        String userId = request.userId();
         List<Order> orderList = orderRepository.findByUserId(userId);
         if (orderList.isEmpty()) {
             throw new ResourceNotFoundException(userId);

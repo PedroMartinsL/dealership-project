@@ -104,7 +104,7 @@ public class OrderController {
 	}
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Order>> findByUser(@PathVariable Long userId) {
+    public ResponseEntity<List<Order>> findByUser(@PathVariable String userId) {
         FindByUserOrderUseCaseRequest orderRequest = new FindByUserOrderUseCaseRequest(userId);
         FindByUserOrderUseCaseResponse orderReponse = findByUserOrderUseCase.execute(orderRequest);
         List<Order> orders = orderReponse.orders();
