@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dealership.project.api.dto.UserDTO;
 import com.dealership.project.application.services.UserService;
-import com.dealership.project.infrastructure.mappers.UserMapper;
+import com.dealership.project.domain.entities.User;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,12 +19,12 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
     
     private final UserService service;
-    private final UserMapper mapper;
+    // private final UserMapper mapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void salvar(@RequestBody UserDTO dto) {
-        var user = mapper.userDTOToUser(dto);
+        User user = new User(dto);
         service.save(user);
     }
 }

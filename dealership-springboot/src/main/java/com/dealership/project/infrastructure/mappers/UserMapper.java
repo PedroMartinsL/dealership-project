@@ -1,16 +1,11 @@
 package com.dealership.project.infrastructure.mappers;
 
-import org.mapstruct.Mapper;
+// @Mapper(componentModel = "spring")
+// public interface UserMapper {
 
-import com.dealership.project.api.dto.UserDTO;
-import com.dealership.project.domain.entities.User;
+//     // Mapeamento de User para UserDTO
+//     UserDTO userToUserDTO(User user);
 
-@Mapper(componentModel = "spring")
-public interface UserMapper {
-
-    // Mapeamento de User para UserDTO
-    UserDTO userToUserDTO(User user);
-
-    // Mapeamento de UserDTO para User
-    User userDTOToUser(UserDTO userDTO);
-}
+//     // Mapeamento de UserDTO para User
+//     User userDTOToUser(UserDTO userDTO);
+// }

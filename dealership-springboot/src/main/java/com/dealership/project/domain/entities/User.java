@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.hibernate.annotations.Type;
 
+import com.dealership.project.api.dto.UserDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.hypersistence.utils.hibernate.type.array.ListArrayType;
@@ -54,17 +55,24 @@ public class User extends EntityReference<UserProps> implements Serializable {
         this.password = password;
     }
 
-    public String getName() {
-        return props.getName();
+    public User(UserDTO dto) {
+        super(null, null, null, null); // ou chame como precisar
+        this.props = new UserProps(dto.email(), dto.name()); // atribuição correta
+        this.password = dto.password();
+        this.roles = dto.roles();
     }
 
-    public String getEmail() {
+    public String getName() {
         return props.getEmail();
     }
 
     public void setName(String name) {
         props.setName(name);
         touch();
+    }
+
+    public String getEmail() {
+        return props.getEmail();
     }
 
     public void setEmail(String email) {
@@ -83,5 +91,17 @@ public class User extends EntityReference<UserProps> implements Serializable {
 
     public List<Order> getOrders() {
         return orders;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public UserProps getProps() {
+        return props;
+    }
+
+    public List<String> getRoles() {
+        return roles;
     }
 }

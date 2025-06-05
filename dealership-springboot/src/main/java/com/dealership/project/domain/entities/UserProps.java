@@ -6,6 +6,14 @@ import lombok.Data;
 @Embeddable
 @Data
 public class UserProps {
-    private String name;
+
     private String email;
+    private String name;
+
+    public UserProps(String email, String name) {
+        this.email = email;
+        this.name = name;
+    }
+
+    public UserProps() {}
 }
