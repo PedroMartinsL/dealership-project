@@ -25,7 +25,7 @@ import com.dealership.project.application.useCases.customization.send.SendCustom
 import com.dealership.project.domain.entities.Customization;
 
 @RestController
-@RequestMapping(value = "/customizations")
+@RequestMapping("/customizations")
 public class CustomizationController {
 
     @Autowired

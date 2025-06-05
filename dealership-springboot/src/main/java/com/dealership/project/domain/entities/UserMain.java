@@ -15,13 +15,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "user_data")
 @EqualsAndHashCode(callSuper = false)
-public class User extends EntityReference<UserProps> implements Serializable {
+public class UserMain extends EntityReference<UserProps> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,22 +38,22 @@ public class User extends EntityReference<UserProps> implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders; 
 
-    public User() {
+    public UserMain() {
         // Chama o construtor da superclasse (EntityReference) com parâmetros padrão
         super(null, null, null, null);
     }
 
-    public User(UserProps props, String password) {
+    public UserMain(UserProps props, String password) {
         super(props, null, null, null);
         this.password = password;
     }
 
-    public User(UserProps props, String password, String id, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public UserMain(UserProps props, String password, String id, LocalDateTime createdAt, LocalDateTime updatedAt) {
         super(props, id, createdAt, updatedAt);
         this.password = password;
     }
 
-    public User(UserDTO dto) {
+    public UserMain(UserDTO dto) {
         super(null, null, null, null); // ou chame como precisar
         this.props = new UserProps(dto.email(), dto.name()); // atribuição correta
         this.password = dto.password();
@@ -104,4 +102,18 @@ public class User extends EntityReference<UserProps> implements Serializable {
     public List<String> getRoles() {
         return roles;
     }
+
+    public void setProps(UserProps props) {
+        this.props = props;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    
 }

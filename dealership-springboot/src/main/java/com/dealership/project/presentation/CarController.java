@@ -32,7 +32,7 @@ import com.dealership.project.application.useCases.car.update.UpdateCarUseCaseRe
 import com.dealership.project.domain.entities.Car;
 
 @RestController
-@RequestMapping(value = "/cars")
+@RequestMapping("/cars")
 public class CarController {
 
     @Autowired

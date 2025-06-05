@@ -37,7 +37,7 @@ public class Order implements Serializable {
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserMain user;
 
     @ManyToOne
     @JoinColumn(name = "store_id")
@@ -59,7 +59,7 @@ public class Order implements Serializable {
         this.orderInstant = orderDTO.getOrderInstant();
     }
 
-    public Order(Long id, Car car, Customization customization, User user, Store store, Instant orderInstant) {
+    public Order(Long id, Car car, Customization customization, UserMain user, Store store, Instant orderInstant) {
         this.id = id;
         this.car = car;
         this.customization = customization;
@@ -84,7 +84,7 @@ public class Order implements Serializable {
         return customization;
     }
 
-    public User getUser() {
+    public UserMain getUser() {
         return user;
     }
 
