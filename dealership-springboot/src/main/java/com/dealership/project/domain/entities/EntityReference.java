@@ -4,17 +4,20 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class EntityReference<T> {
-    @Id
-    private String id;
 
+    @Id
+    private final String id;
+
+    @Embedded
     protected T props;
 
-    private LocalDateTime createdAt;
+    private final LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;

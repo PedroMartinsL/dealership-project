@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.hypersistence.utils.hibernate.type.array.ListArrayType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.EqualsAndHashCode;
@@ -26,9 +25,6 @@ public class UserMain extends EntityReference<UserProps> implements Serializable
     @JsonIgnore
     @Column(nullable = false)
     private String password;
-
-    @Embedded
-    private UserProps props;
 
     @Type(ListArrayType.class)
     @Column(name = "roles", columnDefinition = "varchar[]")

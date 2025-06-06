@@ -1,9 +1,11 @@
 package com.dealership.project.application.services;
 
-import com.dealership.project.domain.entities.UserMain;
+import java.util.List;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.dealership.project.domain.entities.UserMain;
 import com.dealership.project.infrastructure.repositories.JpaUserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -23,5 +25,9 @@ public class UserService {
 
     public UserMain getUserByName(String name) {
         return userRepository.findByName(name).orElse(null);
+    }
+
+    public List<UserMain> findAll() {
+        return userRepository.findAll();
     }
 }

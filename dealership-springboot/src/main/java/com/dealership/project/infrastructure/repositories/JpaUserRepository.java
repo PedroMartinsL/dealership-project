@@ -12,5 +12,6 @@ public interface JpaUserRepository extends JpaRepository<UserMain, String> {
     
     @Query("SELECT u FROM UserMain u WHERE u.props.name = :name")
     Optional<UserMain> findByName(@Param("name") String name);
+
 }
 

@@ -3,6 +3,7 @@ package com.dealership.project.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -22,11 +23,13 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
             .csrf(AbstractHttpConfigurer::disable)
-            .formLogin(configurer -> configurer.loginPage("/login").permitAll())
+            .httpBasic(Customizer.withDefaults())
+            .formLogin(configurer -> configurer.loginPage("/login"))
             .authorizeHttpRequests(authorize -> 
             {
-                authorize.requestMatchers("/users/**").permitAll();
                 authorize.requestMatchers("/login/**").permitAll();
+                authorize.requestMatchers(HttpMethod.POST, "/users/**").permitAll();
+                authorize.requestMatchers("/users/**").permitAll();
                 authorize.requestMatchers(HttpMethod.POST, "/login/**").permitAll();
                 authorize.anyRequest().authenticated();
             })
