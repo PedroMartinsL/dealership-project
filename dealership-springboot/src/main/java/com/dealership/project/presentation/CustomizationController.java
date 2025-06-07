@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,7 @@ public class CustomizationController {
     private FindAllCustomizationsUseCase findAllCustomizationsUseCase;
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
     public ResponseEntity<List<Customization>> findAll() {
 		FindAllCustomizationsUseCaseResponse response = findAllCustomizationsUseCase.execute();
         List<Customization> customizationsList = response.customizations();
@@ -45,6 +47,7 @@ public class CustomizationController {
 	}
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
     public ResponseEntity<Customization> findById(@PathVariable Long id) {
 		FindByIdCustomizationUseCaseRequest customizationRequest = new FindByIdCustomizationUseCaseRequest(id);
         FindByIdCustomizationUseCaseResponse customizationReponse = findByIdCustomizationUseCase.execute(customizationRequest);
@@ -53,6 +56,7 @@ public class CustomizationController {
 	}
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
     public ResponseEntity<Customization> insert(
         @RequestBody CustomizationDTO customizationDTO
     ) {

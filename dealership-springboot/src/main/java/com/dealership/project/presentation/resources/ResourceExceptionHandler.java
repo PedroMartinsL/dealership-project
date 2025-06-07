@@ -4,8 +4,10 @@ import java.time.Instant;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.dealership.project.presentation.exceptions.AssociationInUseException;
 import com.dealership.project.presentation.exceptions.DatabaseException;
@@ -51,6 +53,15 @@ public class ResourceExceptionHandler {
 		String error = "The resource cannot be removed or changed because it is in use by another entity.";
 		HttpStatus status = HttpStatus.CONFLICT;
 		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+
+	@ExceptionHandler(AccessDeniedException.class)
+	@ResponseStatus(HttpStatus.FORBIDDEN)
+	public ResponseEntity<StandardError> handleAccessDeniedException(AccessDeniedException accessDeniedException, HttpServletRequest request) {
+		String error = "You aren't allowed to entry.";
+		HttpStatus status = HttpStatus.FORBIDDEN;
+		StandardError err = new StandardError(Instant.now(), status.value(), error, accessDeniedException.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
 }

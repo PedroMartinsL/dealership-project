@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +52,7 @@ public class CarController {
     private SendCarUseCase sendCarUseCase;
 
     @GetMapping
+    
     public ResponseEntity<List<Car>> findAll() {
 		FindAllCarsUseCaseResponse response = findAllCarsUseCase.execute();
         List<Car> CarsList = response.listCars();
@@ -66,6 +68,7 @@ public class CarController {
 	}
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Car> insert(
         @RequestBody CarDTO carDTO
     ) {
@@ -77,6 +80,7 @@ public class CarController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Car> update(@PathVariable Long id, @RequestBody CarDTO CarDTO) {
         UpdateCarUseCaseRequest request = new UpdateCarUseCaseRequest(id, CarDTO);
 		UpdateCarUseCaseResponse response = updateCarUseCase.execute(request);
@@ -85,6 +89,7 @@ public class CarController {
 	}
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
         DeleteCarUseCaseRequest request = new DeleteCarUseCaseRequest(id);
 		deleteCarUseCase.execute(request);

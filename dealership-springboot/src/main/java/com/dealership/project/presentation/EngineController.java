@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +52,7 @@ public class EngineController {
     private DeleteEngineUseCase deleteEngineUseCase;
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
     public ResponseEntity<List<Engine>> findAll() {
 		FindAllEnginesUseCaseResponse response = findAllEnginesUseCase.execute();
         List<Engine> EnginesList = response.engines();
@@ -58,6 +60,7 @@ public class EngineController {
 	}
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
     public ResponseEntity<Engine> findById(@PathVariable Long id) {
 		FindByIdEngineUseCaseRequest EngineRequest = new FindByIdEngineUseCaseRequest(id);
         FindByIdEngineUseCaseResponse EngineReponse = findByIdEngineUseCase.execute(EngineRequest);
@@ -66,6 +69,7 @@ public class EngineController {
 	}
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Engine> insert(
         @RequestBody EngineDTO engineDTO
     ) {
@@ -77,6 +81,7 @@ public class EngineController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
         DeleteEngineUseCaseRequest request = new DeleteEngineUseCaseRequest(id);
 		deleteEngineUseCase.execute(request);
@@ -85,6 +90,7 @@ public class EngineController {
 
     // Only for Deactive
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Engine> update(@PathVariable Long id, @RequestBody EngineDTO EngineDTO) {
         UpdateEngineUseCaseRequest request = new UpdateEngineUseCaseRequest(id, EngineDTO);
 		UpdateEngineUseCaseResponse response = updateEngineUseCase.execute(request);

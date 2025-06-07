@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,6 +64,7 @@ public class OrderController {
     private FindByUserOrderUseCase findByUserOrderUseCase;
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Order>> findAll() {
 		FindAllOrdersUseCaseResponse response = findAllOrdersUseCase.execute();
         List<Order> ordersList = response.orders();
@@ -70,6 +72,7 @@ public class OrderController {
 	}
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
     public ResponseEntity<Order> findById(@PathVariable Long id) {
 		FindByIdOrderUseCaseRequest orderRequest = new FindByIdOrderUseCaseRequest(id);
         FindByIdOrderUseCaseResponse orderReponse = findByIdOrderUseCase.execute(orderRequest);
@@ -78,9 +81,10 @@ public class OrderController {
 	}
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
     public ResponseEntity<Order> insert(
-        @RequestBody OrderDTO orderDTO
-    ) {
+        @RequestBody OrderDTO orderDTO) {
+
         SendOrderUseCaseRequest orderRequest = new SendOrderUseCaseRequest(orderDTO);
         SendOrderUseCaseResponse orderResponse = sendOrderUseCase.execute(orderRequest);
         Order order = orderResponse.order();
@@ -89,6 +93,7 @@ public class OrderController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
         DeleteOrderUseCaseRequest request = new DeleteOrderUseCaseRequest(id);
 		deleteOrderUseCase.execute(request);
@@ -96,6 +101,7 @@ public class OrderController {
 	}
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
     public ResponseEntity<Order> update(@PathVariable Long id, @RequestBody OrderDTO orderDTO) {
         UpdateOrderUseCaseRequest request = new UpdateOrderUseCaseRequest(id, orderDTO);
 		UpdateOrderUseCaseResponse response = updateOrderUseCase.execute(request);
@@ -104,6 +110,7 @@ public class OrderController {
 	}
 
     @GetMapping("/user/{userId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Order>> findByUser(@PathVariable String userId) {
         FindByUserOrderUseCaseRequest orderRequest = new FindByUserOrderUseCaseRequest(userId);
         FindByUserOrderUseCaseResponse orderReponse = findByUserOrderUseCase.execute(orderRequest);
@@ -112,6 +119,7 @@ public class OrderController {
     }
 
     @GetMapping("/store/{storeId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Order>> findByStore(@PathVariable Long storeId) {
         FindByStoreOrderUseCaseRequest orderRequest = new FindByStoreOrderUseCaseRequest(storeId);
         FindByStoreOrderUseCaseResponse orderReponse = findByStoreOrderUseCase.execute(orderRequest);

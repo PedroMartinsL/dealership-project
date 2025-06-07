@@ -87,6 +87,7 @@ public class Order implements Serializable {
     public UserMain getUser() {
         return user;
     }
+    
 
     public Store getStore() {
         return store;
@@ -98,6 +99,22 @@ public class Order implements Serializable {
 
     public Instant getOrderInstant() {
         return orderInstant;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public void setCustomization(Customization customization) {
+        this.customization = customization;
+    }
+
+    public void setUser(UserMain user) {
+        this.user = user;
+    }
+
+    public void setOrderInstant(Instant orderInstant) {
+        this.orderInstant = orderInstant;
     }
 
     @Override

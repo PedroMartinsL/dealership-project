@@ -4,6 +4,7 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,12 +51,14 @@ public class StoreController {
     private UpdateStoreUseCase updateStoreUseCase;
     
     @GetMapping
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
 	public ResponseEntity<FindAllStoresUseCaseResponse> findAll() {
 		FindAllStoresUseCaseResponse response = findAllStoresUseCase.execute();
 		return ResponseEntity.ok().body(response);
 	}
 
     @GetMapping(value = "/{id}")
+    @PreAuthorize("hasAnyRole('CLIENT', 'ADMIN')")
 	public ResponseEntity<FindByIdStoreUseCaseResponse> findById(@PathVariable Long id) {
 		FindByIdStoreUseCaseRequest request = new FindByIdStoreUseCaseRequest(id);
 		FindByIdStoreUseCaseResponse response = findByIdStoreUseCase.execute(request);
@@ -63,6 +66,7 @@ public class StoreController {
 	}
 
 	@PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Store> insert(
         @RequestBody StoreDTO storeDTO
     ) {
@@ -74,6 +78,7 @@ public class StoreController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
         DeleteStoreUseCaseRequest request = new DeleteStoreUseCaseRequest(id);
 		deleteStoreUseCase.execute(request);
@@ -81,6 +86,7 @@ public class StoreController {
 	}
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Store> update(@PathVariable Long id, @RequestBody StoreDTO StoreDTO) {
         UpdateStoreUseCaseRequest request = new UpdateStoreUseCaseRequest(id, StoreDTO);
 		UpdateStoreUseCaseResponse response = updateStoreUseCase.execute(request);
