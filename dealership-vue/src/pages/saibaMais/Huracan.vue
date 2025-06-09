@@ -1,8 +1,8 @@
 <template>
   <section class="banner">
-    <img src="@/assets/lambo/lambo1.webp" alt="Mercedes-Benz GLB" class="banner-img" />
+    <img src="@/assets/lambo/lambo1.webp" alt="Lamborghini Huracan" class="banner-img" />
     <div class="banner-text">
-      <h1>Mercedes-Benz GLB</h1>
+      <h1>Lamborghini Huracan</h1>
       <p>Design moderno com 7 lugares, perfeito para toda a família.</p>
     </div>
   </section>

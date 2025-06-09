@@ -1,6 +1,6 @@
 <template>
   <section class="hero">
-    <img src="../assets/lambo/lambo-banner.jpg" alt="BMW Banner" />
+    <img src="../assets/lambo/lambo-banner.jpg" alt="Huracan Banner" />
     <div class="hero-text">
       <h1>A NOVA HURACAN</h1>
       <p>Sofisticação, desempenho e inovação.</p>

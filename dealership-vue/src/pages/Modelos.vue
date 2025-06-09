@@ -11,7 +11,7 @@
         </div>
   
         <div class="modelo-card">
-          <img src="../assets/lambo/fusca.jpg" alt="LAND ROVER" />
+          <img src="../assets/lambo/fusca.jpg" alt="FUSCA" />
           <h2>Fusquinha Mil Grau</h2>
           <span class="categoria">Elétrico</span>
           <p>A partir de R$ 7.372.950 à vista*</p>
