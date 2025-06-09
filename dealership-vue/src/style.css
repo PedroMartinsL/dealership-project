@@ -77,3 +77,74 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+<<<<<<< Updated upstream
+=======
+
+.modelo-card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.modelo-card .categoria {
+  display: block;
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* PARTE DE MODELOS*/
+
+
+.modelos-page {
+  padding: 2rem 4rem;
+  background-color: white;
+  color: black;
+}
+
+.modelos-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.modelos-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.modelo-card {
+  width: 280px;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.modelo-card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.modelo-card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.modelo-card .categoria {
+  display: block;
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+/* Linha da barrinha de localizacao */
+.router-link-active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+>>>>>>> Stashed changes
