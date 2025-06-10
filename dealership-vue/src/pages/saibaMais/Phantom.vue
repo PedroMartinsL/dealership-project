@@ -2,7 +2,7 @@
   <section class="banner">
     <img src="@/assets/rolls/rollBanner.jpg" alt="ROLLS ROYCE" class="banner-img" />
     <div class="banner-text">
-      <h1>Mercedes-Benz GLB</h1>
+      <h1>Rolls Royce Phantom</h1>
       <p>Design moderno com 7 lugares, perfeito para toda a família.</p>
     </div>
   </section>
