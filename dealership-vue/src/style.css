@@ -2,15 +2,19 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #111;
 }
 
 a {
@@ -23,67 +27,209 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: none;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #0066cc;
+  color: white;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  border-color: #646cff;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.card {
-  padding: 2em;
+  background-color: #0055aa;
 }
 
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
+}
+
+/* ------------------- HEADER ------------------- */
+
+.site-header {
+  background-color: black;
+  padding: 1rem 0;
+}
+
+.site-header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-header .logo {
+  height: 40px;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------- HERO ------------------- */
+
+.hero {
+  position: relative;
+  width: 100%;
+}
+
+.hero img {
+  width: 100%;
+  display: block;
+}
+
+.hero-text {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  color: white;
+  text-shadow: 0 0 10px black;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem 0;
+}
+
+/* ------------------- HIGHLIGHTS ------------------- */
+
+.highlight-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.highlight {
+  position: relative;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.highlight-content {
+  padding-left: 2rem;
+  color: white;
+  text-shadow: 0 0 10px black;
+}
+
+.highlight h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.highlight-separator {
+  height: 20px;
+  background-color: #000000;
+}
+
+/* ------------------- FEATURES (para páginas GLB, Huracan etc) ------------------- */
+
+.banner {
+  position: relative;
+}
+
+.banner-img {
+  width: 100%;
+  height: auto;
+}
+
+.banner-text {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  padding: 1rem;
+  color: white;
   text-align: center;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+  background-color: #111;
 }
 
-/* PARTE DE MODELOS */
+.feature-box {
+  max-width: 400px;
+  text-align: center;
+}
+
+.feature-box img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.feature-caption {
+  color: white;
+  margin-top: 0.5rem;
+}
+
+/* ------------------- FOOTER ------------------- */
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  color: #aaa;
+  font-size: 0.875rem;
+}
+
+/* ------------------- FORM PAGE (CompreOnline.vue) ------------------- */
+
+.form-page {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+}
+
+.form-page h1,
+.form-page h2,
+.form-page h3 {
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+input,
+select,
+button {
+  padding: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+/* ------------------- MODELOS PAGE ------------------- */
 
 .modelos-page {
   padding: 2rem 4rem;
@@ -132,7 +278,8 @@ button:focus-visible {
   margin-bottom: 0.5rem;
 }
 
-/* Linha da barrinha de localizacao */
+/* ------------------- ACTIVE LINK ------------------- */
+
 .router-link-active {
   font-weight: bold;
   text-decoration: underline;

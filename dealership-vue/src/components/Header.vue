@@ -1,7 +1,8 @@
 <template>
   <header class="site-header">
     <div class="container">
-      <img src="@/assets/bmw/logo-bmw.png" alt="BMW" class="logo" />
+      <img src="../assets/bmw/logo-bmw.png" alt="BMW" class="logo" />
+      <!-- Se eu por dois pontinhos ele funciona, @(alias) ele nao funciona -->
       <nav>
         <router-link to="/">Home</router-link>
         <router-link to="/modelos">Modelos</router-link>
