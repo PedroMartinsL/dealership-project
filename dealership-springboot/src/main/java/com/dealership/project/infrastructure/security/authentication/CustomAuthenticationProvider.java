@@ -25,7 +25,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String login = authentication.getName();
         String senhaDigitada = authentication.getCredentials().toString(); //pode ser credencial facial, digital, escrita -> to String
 
-        UserMain userFound = userService.getUserByName(login);
+        //Switching the Name for Email requests
+        UserMain userFound = userService.getUserByEmail(login);
 
         if (userFound == null) {
             throw getErrorUserNotFound();
@@ -47,7 +48,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     }
 
     private UsernameNotFoundException getErrorUserNotFound() {
-        return new UsernameNotFoundException("User or password are wrong!");
+        return new UsernameNotFoundException("Email or password are wrong!");
     }
 
     @Override

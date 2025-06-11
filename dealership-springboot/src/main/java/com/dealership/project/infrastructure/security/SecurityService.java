@@ -22,8 +22,8 @@ public class SecurityService {
     public UserMain getUserLogged() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userdetails = (UserDetails) authentication.getPrincipal();
-        String name = userdetails.getUsername();
-        return userService.getUserByName(name);
+        String email = userdetails.getUsername();
+        return userService.getUserByEmail(email);
     }
 
     public boolean isAdmin() {

@@ -23,8 +23,8 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public UserMain getUserByName(String name) {
-        return userRepository.findByName(name).orElse(null);
+    public UserMain getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
     }
 
     public List<UserMain> findAll() {

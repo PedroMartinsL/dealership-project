@@ -10,8 +10,8 @@ import com.dealership.project.domain.entities.UserMain;
 
 public interface JpaUserRepository extends JpaRepository<UserMain, String> {
     
-    @Query("SELECT u FROM UserMain u WHERE u.props.name = :name")
-    Optional<UserMain> findByName(@Param("name") String name);
+    @Query("SELECT u FROM UserMain u WHERE u.props.email = :email")
+    Optional<UserMain> findByEmail(@Param("email") String email);
     
 }
 

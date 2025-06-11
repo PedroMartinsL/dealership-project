@@ -20,7 +20,7 @@ public class CustomAuthentication implements Authentication {
 
     @Override
     public String getName() {
-        return user.getName();
+        return user.getEmail();
     }
 
     @Override
