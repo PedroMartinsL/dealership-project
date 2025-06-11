@@ -18,9 +18,13 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public void save(UserMain user) {
-        var password = user.getPassword();
-        user.setPassword(passwordEncoder.encode(password));
-        userRepository.save(user);
+        try {
+            var password = user.getPassword();
+            user.setPassword(passwordEncoder.encode(password));
+            userRepository.save(user);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error saving user: " + e.getMessage(), e);
+        }
     }
 
     public UserMain getUserByEmail(String email) {
