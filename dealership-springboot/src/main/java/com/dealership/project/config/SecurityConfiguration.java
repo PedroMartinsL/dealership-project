@@ -8,43 +8,51 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.dealership.project.application.services.UserService;
-import com.dealership.project.presentation.security.CustomUserDetailsService;
+import com.dealership.project.presentation.security.JwtCustomAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(securedEnabled= true, jsr250Enabled= true)
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfiguration {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, UserDetailsService userDetailsService, JwtCustomAuthenticationFilter jwtCustomAuthenticationFilter) throws Exception {
         return http
-            .csrf(AbstractHttpConfigurer::disable)
-            .httpBasic(Customizer.withDefaults())
-            .formLogin(configurer -> configurer.loginPage("/login"))
-            .authorizeHttpRequests(authorize -> 
-            {
-                authorize.requestMatchers("/login/**").permitAll();
-                authorize.requestMatchers(HttpMethod.POST, "/users/**").permitAll();
-                authorize.anyRequest().authenticated();
-            })
-        .build();
+                .csrf(AbstractHttpConfigurer::disable)
+                .httpBasic(Customizer.withDefaults())
+                .formLogin(configurer -> configurer.loginPage("/login"))
+                .authorizeHttpRequests(authorize -> {
+                    authorize.requestMatchers("/login/**").permitAll();
+                    authorize.requestMatchers(HttpMethod.POST, "/users/**").permitAll();
+                    authorize.anyRequest().authenticated();
+                })
+                .userDetailsService(userDetailsService) // <-- Adiciona isso
+                .oauth2ResourceServer(oauth2RS -> oauth2RS.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())))
+                .addFilterAfter(jwtCustomAuthenticationFilter, BearerTokenAuthenticationFilter.class)
+                .build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        // Times passed throught code entered
-        return new BCryptPasswordEncoder(10);
+    public GrantedAuthorityDefaults grantedAuthorityDefaults() {
+        return new GrantedAuthorityDefaults("");
     }
 
+    //Config in token jwt the prefix SCOPE
     @Bean
-    public UserDetailsService userDetailsService(UserService userService) {
-        // Who seeds the User
-        return new CustomUserDetailsService(userService);
+    public JwtAuthenticationConverter jwtAuthenticationConverter() {
+        var authoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        authoritiesConverter.setAuthorityPrefix("");
+
+        var converter = new JwtAuthenticationConverter();
+        converter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
+
+        return converter;
     }
 }
