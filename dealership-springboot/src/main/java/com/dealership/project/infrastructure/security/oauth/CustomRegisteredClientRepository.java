@@ -1,4 +1,4 @@
-package com.dealership.project.presentation.security;
+package com.dealership.project.infrastructure.security.oauth;
 
 
 import org.springframework.security.oauth2.core.AuthorizationGrantType;

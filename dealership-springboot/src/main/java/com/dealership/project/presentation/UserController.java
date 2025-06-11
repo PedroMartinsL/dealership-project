@@ -42,6 +42,7 @@ public class UserController {
     }
 
     @GetMapping("/search")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserMain> getUserByName(@RequestParam String name) {
         return ResponseEntity.ok(userService.getUserByName(name));
     }

@@ -1,4 +1,4 @@
-package com.dealership.project.presentation.security;
+package com.dealership.project.infrastructure.security.authentication;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

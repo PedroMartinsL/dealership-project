@@ -1,6 +1,9 @@
-package com.dealership.project.presentation.security;
+package com.dealership.project.infrastructure.security;
+
+import java.util.List;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -21,5 +24,23 @@ public class SecurityService {
         UserDetails userdetails = (UserDetails) authentication.getPrincipal();
         String name = userdetails.getUsername();
         return userService.getUserByName(name);
+    }
+
+    public boolean isAdmin() {
+        return getRoles().contains("ROLE_ADMIN");
+    }
+
+    public String getUserEmail() {
+        return getAuthentication().getName(); // email
+    }
+
+    private Authentication getAuthentication() {
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
+
+    private List<String> getRoles() {
+        return getAuthentication().getAuthorities().stream()
+            .map(GrantedAuthority::getAuthority)
+            .toList();
     }
 }

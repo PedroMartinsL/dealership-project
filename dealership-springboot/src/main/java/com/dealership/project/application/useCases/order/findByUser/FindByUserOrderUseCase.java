@@ -15,10 +15,10 @@ public class FindByUserOrderUseCase extends AbstractOrderUseCase {
 
     @Transactional
     public FindByUserOrderUseCaseResponse execute(FindByUserOrderUseCaseRequest request) {
-        String userId = request.userId();
-        List<Order> orderList = orderRepository.findByUserId(userId);
+        String userEmail = request.userEmail();
+        List<Order> orderList = orderRepository.findByUserEmail(userEmail);
         if (orderList.isEmpty()) {
-            throw new ResourceNotFoundException(userId);
+            throw new ResourceNotFoundException(userEmail);
         }
         return new FindByUserOrderUseCaseResponse(orderList);
     }

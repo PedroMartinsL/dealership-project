@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.dealership.project.presentation.security.CustomAuthentication;
+import com.dealership.project.infrastructure.security.authentication.CustomAuthentication;
 
 @Controller
 public class LoginViewController {
@@ -28,7 +28,7 @@ public class LoginViewController {
         if(authentication instanceof CustomAuthentication customAuth) {
             System.out.println(customAuth.getUser());
         }
-        return "Hello" + authentication.getName();
+        return "Hello" + (authentication != null ? authentication.getName() : "Guest");
     }
 
 }

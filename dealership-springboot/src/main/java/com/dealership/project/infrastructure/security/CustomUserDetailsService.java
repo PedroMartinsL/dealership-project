@@ -1,4 +1,4 @@
-package com.dealership.project.presentation.security;
+package com.dealership.project.infrastructure.security;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

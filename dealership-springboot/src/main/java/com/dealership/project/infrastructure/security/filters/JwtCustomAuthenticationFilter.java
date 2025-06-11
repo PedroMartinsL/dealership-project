@@ -1,4 +1,4 @@
-package com.dealership.project.presentation.security;
+package com.dealership.project.infrastructure.security.filters;
 
 import java.io.IOException;
 
@@ -10,6 +10,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.dealership.project.application.services.UserService;
 import com.dealership.project.domain.entities.UserMain;
+import com.dealership.project.infrastructure.security.authentication.CustomAuthentication;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

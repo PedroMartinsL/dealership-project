@@ -1,4 +1,4 @@
-package com.dealership.project.presentation.security;
+package com.dealership.project.infrastructure.security.authentication;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

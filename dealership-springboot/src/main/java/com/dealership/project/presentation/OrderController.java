@@ -64,7 +64,7 @@ public class OrderController {
     private FindByUserOrderUseCase findByUserOrderUseCase;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT')")
     public ResponseEntity<List<Order>> findAll() {
 		FindAllOrdersUseCaseResponse response = findAllOrdersUseCase.execute();
         List<Order> ordersList = response.orders();
