@@ -1,5 +1,7 @@
 package com.dealership.project.application.useCases.order.update;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.dealership.project.api.dto.OrderDTO;
@@ -17,12 +19,28 @@ public class UpdateOrderUseCase extends AbstractOrderUseCase {
     public UpdateOrderUseCaseResponse execute(UpdateOrderUseCaseRequest request) {
         Long id = request.id();
         OrderDTO orderDTO = request.orderDTO();
+
         try {
-            Order order = orderRepository.getReferenceById(id);
+            Order order;
+
+            if (securityService.isAdmin()) {
+                order = orderRepository.findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException(id));
+            } else {
+                String email = securityService.getUserEmail();
+                List<Order> userOrders = orderRepository.findByUserEmail(email);
+
+                order = userOrders.stream()
+                        .filter(o -> o.getId().equals(id))
+                        .findFirst()
+                        .orElseThrow(() -> new ResourceNotFoundException(id));
+            }
+
             updateData(order, orderDTO);
             order = orderRepository.save(order);
-            UpdateOrderUseCaseResponse response = new UpdateOrderUseCaseResponse(order);
-            return response;
+
+            return new UpdateOrderUseCaseResponse(order);
+
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
