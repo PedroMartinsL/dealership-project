@@ -57,7 +57,7 @@ public class UserMain extends EntityReference<UserProps> implements Serializable
     }
 
     public String getName() {
-        return props.getEmail();
+        return props.getName();
     }
 
     public void setName(String name) {

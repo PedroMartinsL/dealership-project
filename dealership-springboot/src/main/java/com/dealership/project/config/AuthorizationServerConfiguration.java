@@ -112,12 +112,12 @@ public class AuthorizationServerConfiguration {
 
             if (principal instanceof CustomAuthentication authentication) {
                 OAuth2TokenType tipoToken = context.getTokenType();
-                Collection<GrantedAuthority> authorities = authentication.getAuthorities();
-                List<String> authoritiesList = authorities.stream()
-                        .map(GrantedAuthority::getAuthority)
-                        .toList();
 
                 if (OAuth2TokenType.ACCESS_TOKEN.equals(tipoToken)) {
+                    Collection<GrantedAuthority> authorities = authentication.getAuthorities();
+                    List<String> authoritiesList = authorities.stream()
+                        .map(GrantedAuthority::getAuthority)
+                        .toList();
                     context.getClaims()
                             .claim("authorities", authoritiesList)
                             .claim("email", authentication.getUser().getEmail());
