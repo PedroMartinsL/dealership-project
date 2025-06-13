@@ -52,7 +52,6 @@ public class CarController {
     private SendCarUseCase sendCarUseCase;
 
     @GetMapping
-    
     public ResponseEntity<List<Car>> findAll() {
 		FindAllCarsUseCaseResponse response = findAllCarsUseCase.execute();
         List<Car> CarsList = response.listCars();
