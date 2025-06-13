@@ -6,6 +6,8 @@ import CompreOnline from '../pages/CompreOnline.vue'
 import Huracan from '../pages/saibaMais/Huracan.vue'
 import Glb from '../pages/saibaMais/Glb.vue'
 import Phantom from '../pages/saibaMais/Phantom.vue'
+import CadastroCarro from '../pages/CadastroCarro.vue'
+
 
 
 
@@ -15,9 +17,13 @@ const routes = [
     { path: '/modelos', component: Modelos },
     { path: '/compre-online', component: CompreOnline },
     { path: '/saibamais/huracan', component: Huracan },
-    { path: '/saibamais/glb', component: Glb },
-    { path: '/saibamais/phantom', component: Phantom }
+  { path: '/saibamais/glb', component: Glb },
+  { path: '/saibamais/phantom', component: Phantom },
+  { path: '/cadastro-carro', component: CadastroCarro },
+
 ]
+
+
 
 const router = createRouter({
   history: createWebHistory(),
