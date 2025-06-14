@@ -10,6 +10,8 @@ import CadastroCarro from '../pages/CadastroCarro.vue'
 import CadastroCustomization from '../pages/CadastroCustomization.vue'
 import CadastroEngine from '../pages/CadastroEngine.vue'
 import CadastroOrder from '../pages/CadastroOrder.vue'
+import CadastroStore from '../pages/CadastroStore.vue';
+
 
 
 
@@ -23,7 +25,9 @@ const routes = [
   { path: '/cadastro-carro', component: CadastroCarro },
   { path: '/cadastro-customization', component: CadastroCustomization },
   { path: '/cadastro-engine', component: CadastroEngine },
-  { path: '/cadastro-order', component: CadastroOrder }
+  { path: '/cadastro-order', component: CadastroOrder },
+  { path: '/cadastro-store', component: CadastroStore }
+
 
 
 ]
