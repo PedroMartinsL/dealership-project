@@ -1,54 +1,111 @@
 <template>
   <header class="site-header">
     <div class="container">
-      <img src="../assets/bmw/logo-bmw.png" alt="BMW" class="logo" />
-      <!-- Se eu por dois pontinhos ele funciona, @(alias) ele nao funciona -->
-      <nav>
-        <router-link to="/">Home</router-link>
-        <router-link to="/modelos">Modelos</router-link>
-        <router-link to="/compre-online">Compre Online</router-link>
-        <a href="#">Configure o seu</a>
-        <a href="#">Recall</a>
+      <div class="logo-nome">
+        <img src="../assets/bmw/logo-bmw.png" alt="BMW" class="logo" />
+        <span class="titulo">Dealership</span>
+      </div>
+
+      <nav class="nav-links">
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/modelos">Modelos</RouterLink>
+
+        <button class="hamburger" @click="menuAberto = !menuAberto">
+          ☰
+        </button>
       </nav>
+    </div>
+
+    <div class="hamburger-menu" v-if="menuAberto">
+      <RouterLink to="/cadastro-carro">Carro</RouterLink>
+      <RouterLink to="/cadastro-customization">Personalização</RouterLink>
+      <RouterLink to="/cadastro-engine">Motor</RouterLink>
+      <RouterLink to="/cadastro-order">Pedido</RouterLink>
+      <RouterLink to="/cadastro-store">Loja</RouterLink>
+      <RouterLink to="/cadastro-user">Usuário</RouterLink>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
+
+const menuAberto = ref(false)
 </script>
 
 <style scoped>
 .site-header {
   background-color: black;
+  color: white;
   padding: 1rem 0;
+  position: relative;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+}
+
+.logo-nome {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
   height: 40px;
+  margin-right: 10px;
 }
 
-nav {
+.titulo {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.nav-links {
   display: flex;
+  align-items: center;
   gap: 1rem;
 }
 
-nav a {
+nav a,
+.hamburger-menu a {
   color: white;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: bold;
 }
 
-nav a:hover {
+nav a:hover,
+.hamburger-menu a:hover {
   text-decoration: underline;
+}
+
+.hamburger {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.hamburger-menu {
+  background-color: #222;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  z-index: 999;
+}
+
+.hamburger-menu a {
+  margin: 0.5rem 0;
 }
 </style>
