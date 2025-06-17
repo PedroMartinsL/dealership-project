@@ -120,7 +120,6 @@ public class AuthorizationServerConfiguration {
                         .toList();
                     context.getClaims()
                             .claim("authorities", authoritiesList)
-                            .claim("email", authentication.getUser().getEmail());
                 }
             }
         };
