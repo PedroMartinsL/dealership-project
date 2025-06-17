@@ -9,6 +9,7 @@
       <nav class="nav-links">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/modelos">Modelos</RouterLink>
+        <RouterLink to="/about">About</RouterLink>
 
         <button class="hamburger" @click="menuAberto = !menuAberto">
           ☰
