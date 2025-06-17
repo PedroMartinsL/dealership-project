@@ -4,7 +4,7 @@
         image="../assets/pessoal/Gabriel Lopes.jpg"
         title="Gabriel Lopes"
         subtitle="Desenvolvedor da Aplicação Frontend"
-        description="O 'Agiota' dos carros da concessionária! Ele é o cara que consegue qualquer coisa que você imaginar, sempre com um sorriso no rosto e uma oferta irrecusável! Se você estiver atrás de uma Brasília amarela ou de um Fusca zero quilômetro, é com ele — Esse cara tem a solução!"
+        description="O 'Agiota' dos carros da concessionária! Ele é o cara que consegue qualquer carro que você imaginar, sempre com um sorriso no rosto e uma oferta irrecusável! Se você estiver atrás de uma Brasília amarela ou de um Fusca zero quilômetro, é com ele — Esse cara tem a solução!"
       />
   
       <div class="divider"></div>
