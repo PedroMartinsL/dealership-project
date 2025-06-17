@@ -22,7 +22,7 @@
         image="../assets/pessoal/Profe Augusto.jpg"
         title="Mestre Augusto Cesar"
         subtitle="Dono da concessionária"
-        description="O imperador que trocou Roma pelo Brasil e se tornou uma lenda na concessionária e no mundo da programação! Comanda tudo com autoridade, visão e carisma, é o verdadeiro chefe dos paranauês."
+        description="O imperador que trocou Roma pelo Brasil e se tornou uma lenda na concessionária e no mundo da programação! Comanda tudo na concessionária com autoridade e carisma."
       />
     </section>
   </template>
