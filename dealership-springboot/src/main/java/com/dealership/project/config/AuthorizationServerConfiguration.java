@@ -119,7 +119,7 @@ public class AuthorizationServerConfiguration {
                         .map(GrantedAuthority::getAuthority)
                         .toList();
                     context.getClaims()
-                            .claim("authorities", authoritiesList)
+                            .claim("authorities", authoritiesList);
                 }
             }
         };
