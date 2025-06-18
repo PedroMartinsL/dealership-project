@@ -4,7 +4,7 @@ public enum EngineType {
 
     ELETRIC(1),
     INTERNAL_COMBUSTION(2),
-    HIBRID(3);
+    HYBRID(3);
 
     private final int code;
 
