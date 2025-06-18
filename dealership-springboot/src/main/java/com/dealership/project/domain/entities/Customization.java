@@ -6,8 +6,10 @@ import com.dealership.project.api.dto.CustomizationDTO;
 import com.dealership.project.domain.entities.enums.CustomCoating;
 import com.dealership.project.domain.entities.enums.CustomColor;
 import com.dealership.project.domain.entities.enums.CustomWheel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,8 +26,8 @@ public class Customization implements Serializable {
     private Integer customWheel;
     private Integer customCoating;
 
-    
-    @OneToOne(mappedBy = "customization")
+    @JsonIgnore
+    @OneToOne(mappedBy = "customization", fetch = FetchType.LAZY)
     private Order order;
 
     public Customization() {
@@ -40,9 +42,9 @@ public class Customization implements Serializable {
     }
 
     public Customization(CustomizationDTO customizationDTO) {
-        this.customCoating = customizationDTO.getCustomCoating();
-        this.customColor = customizationDTO.getCustomColor();
-        this.customWheel = customizationDTO.getCustomWheel();
+        this.customCoating = customizationDTO.getCustomCoating().getCode();
+        this.customColor = customizationDTO.getCustomColor().getCode();
+        this.customWheel = customizationDTO.getCustomWheel().getCode();
     }
 
     public Long getId() {

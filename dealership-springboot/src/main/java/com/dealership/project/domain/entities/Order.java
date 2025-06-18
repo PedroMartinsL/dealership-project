@@ -54,7 +54,6 @@ public class Order implements Serializable {
     public Order(OrderDTO orderDTO) {
         this.car = orderDTO.getCar();
         this.customization = orderDTO.getCustomization();
-        this.user = orderDTO.getUser();
         this.store = orderDTO.getStore();
         this.orderInstant = orderDTO.getOrderInstant();
     }

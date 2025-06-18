@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityService {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserMain getUserLogged() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -27,7 +27,7 @@ public class SecurityService {
     }
 
     public boolean isAdmin() {
-        return getRoles().contains("ROLE_ADMIN");
+        return getRoles().contains("ADMIN");
     }
 
     public String getUserEmail() {

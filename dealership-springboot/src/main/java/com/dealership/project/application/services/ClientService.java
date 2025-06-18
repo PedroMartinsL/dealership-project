@@ -16,12 +16,20 @@ public class ClientService {
     private final PasswordEncoder encoder;
 
     public Client save(Client client){
-        String senhaCriptografada = encoder.encode(client.getClientSecret());
-        client.setClientSecret(senhaCriptografada);
-        return clientReposository.save(client);
+        try {
+            String senhaCriptografada = encoder.encode(client.getClientSecret());
+            client.setClientSecret(senhaCriptografada);
+            return clientReposository.save(client);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error saving client: " + e.getMessage(), e);
+        }
     }
 
     public Client getByClientID(String clientId) {
-        return clientReposository.findByClientId(clientId);
+        try {
+            return clientReposository.findByClientId(clientId);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error getting client: " + e.getMessage(), e);
+        }
     }
 }

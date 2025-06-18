@@ -17,9 +17,9 @@ public class SendOrderUseCase extends AbstractOrderUseCase {
             UserMain user = securityService.getUserLogged();
 
             Order order = new Order(request.orderDTO());
+            order.setUser(user);
             order = orderRepository.save(order);
 
-            order.setUser(user);
 
             return new SendOrderUseCaseResponse(order);
         } catch (Exception e) {

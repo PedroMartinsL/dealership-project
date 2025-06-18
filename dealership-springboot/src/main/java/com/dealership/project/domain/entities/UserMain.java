@@ -1,10 +1,13 @@
 package com.dealership.project.domain.entities;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.annotations.Type;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.dealership.project.api.dto.UserDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,9 +21,7 @@ import lombok.EqualsAndHashCode;
 
 @Entity
 @EqualsAndHashCode(callSuper = false)
-public class UserMain extends EntityReference<UserProps> implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class UserMain extends EntityReference<UserProps> implements UserDetails {
 
     @JsonIgnore
     @Column(nullable = false)
@@ -56,6 +57,7 @@ public class UserMain extends EntityReference<UserProps> implements Serializable
         this.roles = dto.roles();
     }
 
+    @JsonIgnore
     public String getName() {
         return props.getName();
     }
@@ -65,6 +67,7 @@ public class UserMain extends EntityReference<UserProps> implements Serializable
         touch();
     }
 
+    @JsonIgnore
     public String getEmail() {
         return props.getEmail();
     }
@@ -87,10 +90,6 @@ public class UserMain extends EntityReference<UserProps> implements Serializable
         return orders;
     }
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
     public UserProps getProps() {
         return props;
     }
@@ -110,6 +109,15 @@ public class UserMain extends EntityReference<UserProps> implements Serializable
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles == null ? List.of() : roles.stream()
+            .map(SimpleGrantedAuthority::new)
+            .toList();
+    }
 
-    
+    @Override
+    public String getUsername() {
+        return getEmail();
+    }
 }
