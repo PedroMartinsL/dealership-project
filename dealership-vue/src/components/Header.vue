@@ -4,12 +4,13 @@
       <div class="logo-nome">
         <img src="../assets/bmw/logo-bmw.png" alt="BMW" class="logo" />
         <span class="titulo">Dealership</span>
-      </div>
+      </div>      
 
       <nav class="nav-links">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/modelos">Modelos</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <a :href="authAccess">Login</a>
 
         <button class="hamburger" @click="menuAberto = !menuAberto">
           ☰
@@ -32,9 +33,14 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
-const menuAberto = ref(false)
-</script>
+const authAccess = 'http://localhost:8080/oauth2/authorize' +
+  '?response_type=code' +
+  '&client_id=dealership-vue' +
+  '&redirect_uri=http://localhost:5173/authorized';
 
+const menuAberto = ref(false);
+
+</script>
 <style scoped>
 .site-header {
   background-color: black;

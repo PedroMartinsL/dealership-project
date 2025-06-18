@@ -50,7 +50,6 @@ button:hover {
   padding: 0;
 }
 
-/* ------------------- HEADER ------------------- */
 
 .site-header {
   background-color: black;
@@ -85,7 +84,6 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* ------------------- HERO ------------------- */
 
 .hero {
   position: relative;
@@ -110,7 +108,6 @@ nav a:hover {
   margin: 0 0 0.5rem 0;
 }
 
-/* ------------------- HIGHLIGHTS ------------------- */
 
 .highlight-section {
   display: flex;
@@ -143,7 +140,6 @@ nav a:hover {
   background-color: #000000;
 }
 
-/* ------------------- FEATURES (para páginas GLB, Huracan etc) ------------------- */
 
 .banner {
   position: relative;
@@ -191,7 +187,6 @@ nav a:hover {
   margin-top: 0.5rem;
 }
 
-/* ------------------- FOOTER ------------------- */
 
 footer {
   text-align: center;
@@ -199,8 +194,6 @@ footer {
   color: #aaa;
   font-size: 0.875rem;
 }
-
-/* ------------------- FORM PAGE (CompreOnline.vue) ------------------- */
 
 .form-page {
   max-width: 700px;
@@ -232,7 +225,6 @@ button {
   width: 100%;
 }
 
-/* ------------------- MODELOS PAGE ------------------- */
 
 .modelos-page {
   padding: 2rem 4rem;

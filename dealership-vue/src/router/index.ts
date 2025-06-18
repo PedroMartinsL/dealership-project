@@ -12,7 +12,8 @@ import CadastroEngine from '../pages/CadastroEngine.vue'
 import CadastroOrder from '../pages/CadastroOrder.vue'
 import CadastroStore from '../pages/CadastroStore.vue'
 import CadastroUser from '../pages/CadastroUser.vue'
-import About from '../pages/About.vue';
+import About from '../pages/About.vue'
+import Authorized from '../components/Authorized.vue'
 
 
 const routes = [
@@ -28,7 +29,8 @@ const routes = [
   { path: '/cadastro-order', component: CadastroOrder },
   { path: '/cadastro-store', component: CadastroStore },
   { path: '/cadastro-user', component: CadastroUser },
-  { path: '/about', component: About }
+  { path: '/about', component: About },
+  { path: '/authorized', component: Authorized },
 
 ]
 
